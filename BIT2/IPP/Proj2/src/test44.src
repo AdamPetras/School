@@ -1,0 +1,5 @@
+.IPPcode18
+JUMP label
+WRITE string@toto\032nemuze\032vypsat
+LABEL label
+WRITE string@OK

@@ -1,0 +1,8 @@
+.IPPcode18
+DEFVAR GF@result
+DEFVAR GF@tmp
+DEFVAR GF@temp
+MOVE GF@tmp string@toto\032je
+MOVE GF@temp string@\032string
+CONCAT GF@result GF@tmp GF@temp
+WRITE GF@result

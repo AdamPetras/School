@@ -1,0 +1,4 @@
+.IPPcode18
+DEFVAR GF@result
+NOT GF@result bool@false
+WRITE GF@result

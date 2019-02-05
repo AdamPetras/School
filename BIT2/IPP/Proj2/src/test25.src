@@ -1,0 +1,4 @@
+.IPPcode18
+DEFVAR GF@result
+GETCHAR GF@result string@toto\032je\032A int@8
+WRITE GF@result

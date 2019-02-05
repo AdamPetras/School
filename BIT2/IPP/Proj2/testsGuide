@@ -1,0 +1,47 @@
+Defvar and move int to variable
+Defvar and move string to variable
+Defvar and move bool to variable
+Defvar and move from variable to variable
+Move and add operation 2 variables to variable on global frame
+Move and sub operation 2 variables to variable on global frame
+Move and idiv operation 2 variables to variable on global frame
+Move and mul operation 2 variables to variable on global frame
+Move and add operation 2 variables to variable on local frame
+Move and sub operation 2 variables to variable on local frame
+Move and idiv operation 2 variables to variable on local frame
+Move and mul operation 2 variables to variable on local frame
+Greater than
+Less than
+Equal to
+Logical not
+Logical and
+Logical or
+Int2char with const values
+Stri2int with const values
+Concat of two const strings
+Concat of two string from variable
+Strlen of const strings
+Strlen of string from variable
+Getchar of const strings on const position
+Getchar of variable string on variable position
+Setchar of const strings on const position
+Setchar of variable string on variable position
+Test error temporary variable doesn't exist
+Test error temporary variable doesn't exist but the same local exists (If the temporary frame is not same as local frame)
+Call function and return value via stack
+Call function and return value via global
+Test error division by zero
+Setchar set last character of index(check indexing from zero)
+Setchar check index out of boundaries
+Getchar get last character of index(check indexing from zero)
+Getchar check index out of boundaries
+Test error pops empty stack
+Test popframe of empty local frames
+Test pushframe of empty temporary frame
+Test jump on non-exist label
+Test jumpifeq on non-exist label
+Test jumpifneq on non-exist label
+Jump on exist label
+Jumpifeq on exist label
+Jumpifneq on exist label
+SetChar set escape sequence

@@ -1,0 +1,18 @@
+.IPPcode18
+JUMP $$MAIN
+LABEL length
+CREATEFRAME
+DEFVAR TF@temp
+DEFVAR TF@result
+DEFVAR TF@tmp
+PUSHFRAME
+MOVE LF@tmp int@5
+MOVE LF@temp int@20
+ADD LF@result LF@tmp LF@temp
+PUSHS LF@result
+RETURN
+LABEL $$MAIN
+CALL length
+DEFVAR GF@result
+POPS GF@result
+WRITE GF@result

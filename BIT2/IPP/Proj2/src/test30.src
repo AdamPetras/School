@@ -1,0 +1,7 @@
+.IPPcode18
+DEFVAR GF@result
+DEFVAR GF@tmp
+DEFVAR LF@temp
+MOVE GF@tmp int@5
+add GF@result GF@tmp TF@temp
+WRITE GF@result

@@ -1,0 +1,5 @@
+.IPPcode18
+JUMPIFNEQ label int@2 int@1
+WRITE string@toto\032nemuze\032vypsat
+LABEL label
+WRITE string@OK

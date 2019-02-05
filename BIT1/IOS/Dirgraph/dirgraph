@@ -1,0 +1,194 @@
+#!/bin/bash
+POSIXLY_CORRECT=yes
+#********************************Řešení argumentů******************************
+OPTIND=1         # Reset in case getopts has been used previously in the shell.
+norm=0
+regex='\0\n'
+while getopts ":i:n" opt; do
+    case "$opt" in
+    i)
+	if [ "$regex" == "\0\n" ];then
+	regex=$OPTARG
+	else
+	echo "Multiple option -i" 1>&2
+	exit 1
+	fi
+	;;
+    n)  
+	if [ "$norm" -eq "0" ];then
+	norm=1
+	else
+	echo "Multiple option -n" 1>&2
+	exit 1
+	fi
+        ;;
+    \?)
+        echo "Invalid Option: -$OPTARG" 1>&2
+        exit 1
+        ;;
+    :)
+        echo "Invalid Option: -$OPTARG requires an argument" 1>&2
+        exit 1
+        ;;
+    esac
+done
+shift $(($OPTIND-1))
+sizeWrite ()
+{
+valuebef="$1"
+valuenex="$2"
+#echo "$valuebef <---> $valuenex"
+if [ $valuenex ];then
+filesbef=$(find $dir ! -type d -size $valuebef -size $valuenex | egrep -v "$regex" | wc -l)
+else
+filesbef=$(find $dir ! -type d -size $valuebef | egrep -v "$regex" | wc -l)
+fi
+if [ "$norm" -eq "1" ];then
+	if [ "$filesbef" -gt "0" ];then
+	if [ "$pom" -gt "$((size-12))" ];then
+		proportion=$((filesbef*(size-12)/pom))		
+		variable=$(printf '%0.s#' $(seq 1 $proportion))
+	else
+	variable=$(printf '%0.s#' $(seq 1 $filesbef))
+	fi
+	fi
+
+else
+if [ "$filesbef" -gt "0" ];then
+	variable=$(printf '%0.s#' $(seq 1 $filesbef))
+fi
+fi
+
+      echo "  $3: $variable"
+unset variable
+}
+
+#***************************Oštrření vstupu argumentu cesty********************
+#pokud je zadaná cesta
+if [ "$1" ];then
+	if [ "$2" ];then
+	echo "The arguments put in wrong order" 1>&2
+	exit 1
+	fi
+	dir=$1
+else
+	dir="."
+fi
+#pokud je zadaná normalizace
+if [ "$norm" -ne "0" ];then
+#a je otevřen terminál
+	if [ -t 1 ];then
+		size=$(tput cols)
+	else
+		size=79
+	fi
+fi
+#pokud adresář neexistuje
+if [ ! -d $dir ];then
+	echo "Something went wrong... directory doesn't exist" 1>&2
+	exit 1
+#elif [ -z "$dir" ];then
+#	dir=~
+fi
+#pokud je adresář prázdný a zadaná normalizace
+#if [ "$(find $dir ! -type d|wc -l)" -eq "0" ];then
+#	if [ "$norm" -eq "1" ];then
+#		echo "Something went wrong... folder is empty" 1>&2
+#		exit 1
+#	fi
+#fi
+
+#******************************************************************************
+#********************Výpis filesize a informací o adresáři*********************
+echo "Root directory: $dir"
+dirnum=$(find $dir -type d |egrep -v "$regex" | wc -l)
+echo "Directories: $dirnum"
+filenum=$(find $dir ! -type d -not -path $dir |grep -v "$regex" | wc -l)
+echo "All files: $filenum"
+echo "File size histogram:"
+#pokud je zalpá normalizace
+proportion=1
+
+#**********************************Size graf***********************************
+ab=$(find $dir ! -type d -size -100c| egrep -v "$regex" | wc -l)
+aba=$(find $dir ! -type d -size +99c -size -1024c | egrep -v "$regex" | wc -l)
+abab=$(find $dir ! -type d -size +1023c -size -10240c | egrep -v "$regex" | wc -l)
+ababa=$(find $dir ! -type d -size +10239c -size -102400c | egrep -v "$regex" | wc -l)
+abc=$(find $dir ! -type d -size +102399c -size -1048576c | egrep -v "$regex" | wc -l)
+abca=$(find $dir ! -type d -size +1048575c -size -10485760c | egrep -v "$regex" | wc -l)
+abcab=$(find $dir ! -type d -size +10485759c -size -104857600c | egrep -v "$regex" | wc -l)
+abcabc=$(find $dir ! -type d -size +104857599c -size -1073741820c | egrep -v "$regex" | wc -l)
+abcabca=$(find $dir ! -type d -size +1073741819c | egrep -v "$regex" | wc -l)
+pom=$aba
+if [ "$pom" -le "$abab" ];then
+pom=$abab
+fi
+if [ "$pom" -le "$ababa" ];then
+pom=$ababa
+fi
+if [ "$pom" -le "$abc" ];then
+pom=$abc
+fi
+if [ "$pom" -le "$abca" ];then
+pom=$abca
+fi
+if [ "$pom" -le "$abcab" ];then
+pom=$abcab
+fi
+if [ "$pom" -le "$abcabc" ];then
+pom=$abcabc
+fi
+if [ "$pom" -le "$abcabca" ];then
+pom=$abcabca
+fi
+sizeWrite "-100c" "" "<100 B  "
+sizeWrite "+99c" "-1024c" "<1 KiB  "
+sizeWrite "+1023c" "-10240c" "<10 KiB "
+sizeWrite "+10239c" "-102400c" "<100 KiB"
+sizeWrite "+102399c" "-1048576c" "<1 MiB  "
+sizeWrite "+1048575c" "-10485760c" "<10 MiB "
+sizeWrite "+10485759c" "-104857600c" "<100 MiB"
+sizeWrite "+104857599c" "-1073741820c" "<1 GiB  "
+sizeWrite "+1073741819c" "" ">=1 GiB "
+#******************************************************************************
+#******************************File type histogram*****************************
+echo "File type histogram:"
+if [ "$(find $dir ! -type d|wc -l)" -gt "0" ];then
+tmp=$(find $dir ! -type d |egrep -v "$regex" |file -b -f - |sed -re 's/(.{41})/\1...:/'|cut -c 1-40,42-44|sort|uniq -c|sort -r -g -k 1|head -n 10)
+numberof=$(echo "$tmp"|awk '{ print $1 }')
+arrcount=$(echo "$numberof"|wc -l)
+values=$(echo "$tmp" | tr '[:blank:]' '_'|cut -c8-60|tr '_' ' ')
+counter=1
+first=$(echo "$numberof" |sed -n "1p")
+while [ "$counter" -le "$arrcount" ]
+do
+value=$(echo "$values" |sed -n "$counter"'p')
+number=$(echo "$numberof" |sed -n "$counter"'p')
+#if [ "$norm" -ne "0" ];then
+if [ ${#value} -gt "40" ];then
+		unset spaces
+	else
+		spaces=$(printf "%0.s " $(seq 1 $((42-${#value}))))
+		space="  "
+		spaces=$spaces$space
+	fi
+#fi
+if [ "$norm" -eq "1" ];then
+if [ $first -gt $((size-47)) ];then
+proportion=$((number*(size-47)/first))
+variable=$(printf "%0.s#" $(seq 1 $proportion))
+else
+variable=$(printf "%0.s#" $(seq 1 $number)) 
+fi
+else
+if [ $number -gt "0" ];then
+variable=$(printf "%0.s#" $(seq 1 $number))
+fi
+fi
+
+	printf " ${value}"
+	echo "$spaces: $variable"
+	counter=$((counter+1))
+done
+fi
+#******************************************************************************

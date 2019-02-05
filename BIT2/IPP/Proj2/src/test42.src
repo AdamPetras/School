@@ -1,0 +1,2 @@
+.IPPcode18
+JUMPIFEQ label int@1 int@1

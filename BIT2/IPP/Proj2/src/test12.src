@@ -1,0 +1,12 @@
+.IPPcode18
+CREATEFRAME
+DEFVAR TF@tmp
+DEFVAR TF@temp
+PUSHFRAME
+MOVE LF@tmp int@2
+MOVE LF@temp int@5
+WRITE LF@temp
+MOVE LF@temp LF@tmp
+MUL LF@temp LF@tmp LF@temp
+WRITE LF@tmp
+WRITE LF@temp

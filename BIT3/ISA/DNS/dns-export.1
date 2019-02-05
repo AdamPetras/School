@@ -1,0 +1,22 @@
+.TH dns-export 1
+.SH NAME
+.B dns-export
+\- pracuje s DNS záznamy spracovává je z packetů a poté posílá statistiku na Syslog server
+.SH SYNOPSIS
+.B dns-export 
+\- [-r file.pcap] [-i interface] [-s syslog-server] [-t seconds]
+.SH DESCRIPTION
+.B dns-export 
+\- aplikace umí zpracovávat záznamy protokolu DNS které čte buďto ze souboru pcap nebo přímo ze síťové komunikace. Následně statistiky posílá pomocí Syslog protokolu na logovací server.
+.SH OPTIONS
+ -r		zpracuje daný pcap soubor
+ \-i		naslouchá na daném síťovém rozhraní a zpracovává DNS provoz
+ \-s		hostname/ipv4/ipv6 adresa syslog serveru
+ \-t		doba výpočtu statistik, výchozí hodnota 60s
+.SH FILES
+Makefile manual.pdf dns-export.1 dns-export MySyslog.cpp MySyslog.h dns.cpp dns.h mypcap.cpp mypcap.h DnsOperate.cpp DnsOperate.h DnsStructure.cpp DnsStructure.h
+.SH EXAMPLES
+ sudo ./dns-export -i enp4s0  -s 127.0.0.1
+ ./dns-export -r dns.pcap -t 10 -s 192.168.0.100
+.SH AUTOR
+ Adam Petráš (xpetra19@stud.fit.vutbr.cz)

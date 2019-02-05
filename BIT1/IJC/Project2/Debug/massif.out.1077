@@ -1,0 +1,151 @@
+desc: (none)
+cmd: ./Project2
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=105807
+mem_heap_B=168
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=107333
+mem_heap_B=189
+mem_heap_extra_B=35
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=111219
+mem_heap_B=1213
+mem_heap_extra_B=43
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=112286
+mem_heap_B=1234
+mem_heap_extra_B=62
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=112587
+mem_heap_B=1255
+mem_heap_extra_B=81
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=113780
+mem_heap_B=1276
+mem_heap_extra_B=100
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=114081
+mem_heap_B=1297
+mem_heap_extra_B=119
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=116355
+mem_heap_B=1297
+mem_heap_extra_B=119
+mem_stacks_B=0
+heap_tree=peak
+n3: 1297 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 1024 0x4E9E1D3: _IO_file_doallocate (filedoalloc.c:127)
+  n1: 1024 0x4EAC592: _IO_doallocbuf (genops.c:398)
+   n1: 1024 0x4EAB8F6: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:820)
+    n1: 1024 0x4EAA28B: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1331)
+     n1: 1024 0x4E7E23F: vfprintf (vfprintf.c:1320)
+      n1: 1024 0x4E86897: printf (printf.c:33)
+       n1: 1024 0x4008E4: htab_find (in /home/adam/C/Project2/Debug/Project2)
+        n1: 1024 0x400B40: htab_lookup_add (in /home/adam/C/Project2/Debug/Project2)
+         n0: 1024 0x400F40: main (in /home/adam/C/Project2/Debug/Project2)
+ n1: 168 0x400A03: htab_init (in /home/adam/C/Project2/Debug/Project2)
+  n0: 168 0x400F1A: main (in /home/adam/C/Project2/Debug/Project2)
+ n2: 105 0x400A92: create_item_to_list (in /home/adam/C/Project2/Debug/Project2)
+  n3: 63 0x400BF4: htab_lookup_add (in /home/adam/C/Project2/Debug/Project2)
+   n0: 21 0x400F2F: main (in /home/adam/C/Project2/Debug/Project2)
+   n0: 21 0x400F51: main (in /home/adam/C/Project2/Debug/Project2)
+   n0: 21 0x400F73: main (in /home/adam/C/Project2/Debug/Project2)
+  n2: 42 0x400BB0: htab_lookup_add (in /home/adam/C/Project2/Debug/Project2)
+   n0: 21 0x400F40: main (in /home/adam/C/Project2/Debug/Project2)
+   n0: 21 0x400F62: main (in /home/adam/C/Project2/Debug/Project2)
+#-----------
+snapshot=9
+#-----------
+time=116355
+mem_heap_B=1276
+mem_heap_extra_B=100
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=117502
+mem_heap_B=1255
+mem_heap_extra_B=81
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=118609
+mem_heap_B=1234
+mem_heap_extra_B=62
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=118687
+mem_heap_B=1213
+mem_heap_extra_B=43
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=118769
+mem_heap_B=1192
+mem_heap_extra_B=24
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=118828
+mem_heap_B=1024
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=122651
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
